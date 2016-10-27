@@ -1,0 +1,57 @@
+hadoop namenode -format
+
+
+#save on dfs
+hadoop jar $HADOOP_PREFIX/contrib/streaming/hadoop-streaming-1.2.1.jar -mapper 'hdfs://umang-inspiron/user/umang/mapper.py' -reducer 'hdfs://umang-inspiron/user/umang/reducer.py' -file recommender/s1.py -input hdfs://umang-inspiron/user/umang/test.txt -output hdfs://umang-inspiron/user/umang/op
+
+
+hadoop jar $HADOOP_PREFIX/contrib/streaming/hadoop-streaming-1.2.1.jar -mapper hdfs://umang-inspiron/user/umang/map_temp.py -file  map_temp.py -reducer hdfs://umang-inspiron/user/umang/red_temp.py -file red_temp.py -input hdfs://umang-inspiron/user/umang/test.txt -output hdfs://umang-inspiron/user/umang/op3
+
+
+hadoop jar $HADOOP_PREFIX/contrib/streaming/hadoop-streaming-1.2.1.jar -mapper hdfs://umang-inspiron/user/umang/mapper.py -file mapper.py -reducer hdfs://umang-inspiron/user/umang/reducer.py -file reducer.py -input hdfs://umang-inspiron/user/umang/test.txt -output hdfs://umang-inspiron/user/umang/op3
+
+
+hadoop jar $HADOOP_PREFIX/contrib/streaming/hadoop-streaming-1.2.1.jar -mapper mapper.py -file mapper.py -reducer reducer.py reducer.py -input test.txt -output op3
+
+
+#final cmd
+
+#1. first mapred cmd 
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper1.py -mapper mapper1.py -file reducer1.py -reducer reducer1.py -input /user/umang/10ux100s.txt -output /user/umang/op1
+
+
+#2. 2nd mapred cmd
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper2.py -mapper mapper2.py -file reducer2.py -reducer reducer2.py -input /user/umang/input2.txt -output /user/umang/op4
+
+#3. 3rd mapred cmd
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper3.py -mapper mapper3.py -file reducer3.py -reducer reducer3.py -input /user/umang/mapred2_op.txt -output /user/umang/op3
+
+
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper3.py -mapper mapper3.py -file reducer3.py -reducer reducer3.py -input /user/umang/op4/part-00000 -output /user/umang/op3
+
+final input files
+
+#1. first mapred cmd 
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper1.py -mapper mapper1.py -file reducer1.py -reducer reducer1.py -input /user/umang/learned_param.txt -output /user/umang/op111
+
+
+#2. 2nd mapred cmd
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper2.py -mapper mapper2.py -file reducer2.py -reducer reducer2.py -input /user/umang/had_inp2.txt -output /user/umang/op222
+
+#3. 3rd mapred cmd
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper3.py -mapper mapper3.py -file reducer3.py -reducer reducer3.py -input /user/umang/mapred2_op.txt -output /user/umang/op3
+
+
+
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper2.py -mapper mapper2.py -file reducer2.py -reducer reducer2.py -input /user/umang/had_inp2.txt -output /user/umang/op222
+
+#install snappy
+
+sudo apt-get install pkg-config libsnappy-dev libz-dev libssl-dev gcc make cmake automake autoconf libtool g++ openjdk-7-jdk maven ant
+
+#cpy snappy to hadoop folder
+cp /usr/lib/libsnappy* /usr/local/hadoop/lib/native/Linux-amd64-64/
+
+
+hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.2.1.jar -file mapper2.py -mapper mapper2.py -file reducer2.py -reducer reducer2.py -input /user/umang/op1/part-00000 -output /user/umang/op4
+
